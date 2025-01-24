@@ -22,12 +22,15 @@ Through chosing this language,
 we want to show you that Fortran is a suprisingly modern programming language.
 .
 .PP
-Our medium implementation here.
+In order to share some of the finer features of the language,
+we will write a medium sized program.
+This medium sized program will then the used to analyze language features.
+This will allow us to share how everything we talked about comes together to form an entire system.
 .
 .NH 2
 .
 .PP
-This report achives our goal through .
+Our goal through this project is to dispel some of the antiqudated views about Fortran.
 We first give the history of the Fortran programming language.
 We then give a brief tutorial of the programming language.
 After that we share some of the basic features of Fortran.
