@@ -5,6 +5,45 @@
 delim $$
 .EN
 .
+.eo
+.de SOURCE_HEADING ..
+.
+.LP
+.ce
+Program Listing of \f(CW\$1\fR
+.
+...
+.ec
+.
+.eo
+.de SOURCE ..
+.
+.TS H
+center doublebox;
+L.
+.TH
+T{
+.gcolor black
+. so \$1
+
+T}
+.gcolor black
+.TE
+.
+...
+.ec
+.
+.eo
+.de PROGRAM_LISTING ..
+.ds listing_file \$1
+.ie ( \n[.$] = 2 )  .ds optional_program_file \$2
+.el                 .ds optional_program_file \*[listing_file]
+.
+.SOURCE_HEADING \*[optional_program_file]
+.SOURCE \*[listing_file]
+.
+...
+.ec
 .
 \&
 .sp 8
