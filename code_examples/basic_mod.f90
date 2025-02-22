@@ -1,6 +1,8 @@
 module numbers
     implicit none
-    
+
+    private
+
     public :: add_numbers
 
     interface add_numbers

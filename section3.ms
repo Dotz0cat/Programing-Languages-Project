@@ -84,6 +84,9 @@ Intrinsics
 .PP
 Fortran does not have a standard library like other programming languages.
 Instead of having standard library functions Fortran has intrinsics.
+Examples of intrinsics are \f(CWprint\fR,
+\f(CWwrite\fR,
+and \f(CWread\fR
 .
 .NH 2
 Modules
@@ -99,12 +102,15 @@ Old way
 .
 .PROGRAM_LISTING program_contains.ms program_contains.f90
 .
-.PP
-Using modules makes this a lot easier.
+.bp
 .
-.PROGRAM_LISTING basic_mod.ms basic_mod.f90
+.LP
+.ce
+Using modules
 .
-.PROGRAM_LISTING use_mod.ms use_mod.f90
+.SOURCE basic_mod.ms
+.
+.SOURCE use_mod.ms
 .
 .PP
 Modules almost always should begin with \f(CWimplcit none\fR.
@@ -134,6 +140,18 @@ For extending submodules you can use
 So on and so forth
 \f(CWsubmodule (super:sub) sub3\fR.
 .
+.LP
+.ce
+Example of Submodule use
+.
+.SOURCE submodule.ms
+.
+.LP
+.ce
+Corasponding parent module
+.
+.SOURCE numbers_p.ms
+.
 .NH 2
 Procedures
 .
@@ -152,6 +170,17 @@ The \f(CWresult(RETURN)\fR is not required.
 If it is not specified,
 then the variable that you return from is the same name as the function.
 .
+.LP
+.ce
+Example function
+.
+.SOURCE function.ms
+.
+.LP
+.ce
+Alternative function declaration
+.
+.SOURCE function_alt.ms
 .
 .NH 3
 Subroutines
@@ -166,6 +195,12 @@ A subroutine can be decalred by
 As same as functions subroutines are ended by
 \f(CWend subroutine NAME\fR.
 .
+.LP
+.ce
+Subroutine example
+.
+.SOURCE subroutine.ms
+.
 .NH 3
 Dummy Arguments
 .
@@ -173,6 +208,19 @@ Dummy Arguments
 When you declare a procedure,
 you don\(cqt specifiy the types of arguments in the delcaration.
 These are defined within the procedure body.
+You must also declare the intent of your arguments.
+.
+.TS
+Center doublebox tab(#);
+C s
+Cb Cb
+Cf(CW) L.
+Types of intent#
+Type#Description
+intent(in)#access in only
+intetn(out)#can only access out
+intent(inout)#can access both in and out
+.TE
 .
 .NH 2
 Interfaces
@@ -181,6 +229,18 @@ Interfaces
 Interfaces provide multiple functionalities.
 They provide a delcaration of arguments and returns for a procedure.
 They also allow overloading of procedures.
+.
+.LP
+.ce
+Basic Interface Example
+.
+.SOURCE interface.ms
+.
+.LP
+.ce
+Interface Overloading Example
+.
+.SOURCE interface_overload.ms
 .
 .NH 2
 Arrays
@@ -194,12 +254,25 @@ In procedure interfaces,
 it is not uncommon to replace \fISIZE\fR with \fI:\fR.
 This specifies that any size could be passed.
 .
+.LP
+.ce
+Example Array Delcaration
+.
+.SOURCE arrays.ms
+.
 .NH 2
 Allocate
 .
 .PP
-The allocate intrinsic allows you to allocate memory.
+The allocate intrinsic allows you to allocate memory
+on an object with the allocatable attribute.
 This can allow you to defer the size of an array until runtime.
+.
+.LP
+.ce
+Example of array with allocatable attribute
+.
+.SOURCE allocatable_array.ms
 .
 .PP
 Allocate is very useful,
@@ -218,21 +291,6 @@ To deallocate memory you use
 \f(CWdeallocate(NAME)\fR.
 .
 .NH 2
-Kind Specification
-.
-.PP
-Sometimes a variable maybe too small or you want more precsion.
-Perhaps you know a variable will never be larger them a specific amount,
-so you could use a smaller variable.
-(ie.\~if its never bigger than 32,767 then it can be stored in a
-\f(CWshort\fR over an \f(CWint\fR).
-Fortran does not have diffrent intrinsic types for diffrent sized variables.
-Fortran uses a kind system.
-Fortran\(cqs kind system could take up an entire chapter or 2 in a book.
-.
-.\"simple example here
-.
-.NH 2
 Derived Types
 .
 .PP
@@ -242,9 +300,28 @@ In \f(CWC\fR you could define a \f(CWstruct\fR for this.
 In Fortran,
 you would define a derived type.
 .
-.NH 2
-Type-bound Procedures
+.LP
+.ce
+Derived type example
 .
+.SOURCE derived_type.ms
+.
+.PP
+Derived types can then be used to declare variables in your code.
+.
+.LP
+Derived type variable declaration example
+.
+.SOURCE derived_type_use.ms
+.
+.PP
+You can access the internals of the derived type by using \f(CW%\fR.
+.
+.LP
+.ce
+Example of derived type assignment
+.
+.SOURCE derived_type_assign.ms
 .
 .NH 2
 Modern Fortran Explained
