@@ -3,6 +3,9 @@ module input
     
     private
 
+    public :: get_number
+    public :: get_operation
+
     interface get_number
         module subroutine get_number(num)
             real, intent(out) :: num
