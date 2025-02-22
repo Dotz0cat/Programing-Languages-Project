@@ -7,8 +7,10 @@ SRCDIR = src
 MODDIR = mod
 OBJDIR = obj
 
-build: $(OBJDIR) $(MODDIR) $(OBJDIR)/main.o
-	$(FC) $(CFLAGS) $(CPPFLAGS) $(OBJDIR)/main.o -o program $(LDLIBS)
+build: $(OBJDIR) $(MODDIR) program
+
+program: $(OBJDIR)/input.o $(OBJDIR)/input_implations.o $(OBJDIR)/processing.o $(OBJDIR)/processing_sub.o $(OBJDIR)/main.o
+	$(FC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDLIBS)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
