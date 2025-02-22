@@ -25,8 +25,8 @@ How do you create a basic hello world program?
 Complation steps of \f(CWhello.f90\fR
 .
 .TS H
-center doublebox;
-L.
+doublebox;
+Lx.
 .TH
 gfortran hello.f90 -o hello
 .TE
@@ -72,8 +72,8 @@ program \f(CWhello\fR.
 Output of the \f(CWhello\fR program
 .
 .TS H
-center doublebox;
-L.
+doublebox;
+Lx.
 .TH
 \& Hello World!
 .TE

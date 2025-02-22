@@ -6,9 +6,9 @@ program use_mod
     integer :: num1
     integer :: num2
 
-    print *, "Enter a number"
+    print '(A$)', "Enter first number: "
     read (*, *) num1
-    print *, "Enter another number"
+    print '(A$)', "Enter second number: "
     read (*, *) num2
 
     total = add_numbers(num1, num2)

@@ -5,9 +5,9 @@ program container
     integer :: num2
     integer :: total
 
-    print *, "Give First Number: "
+    print '(A$)', "Enter First Number: "
     read (*, *) num1
-    print *, "Give Second Number: "
+    print '(A$)', "Enter Second Number: "
     read (*, *) num2
 
     total = add_numbers(num1, num2)

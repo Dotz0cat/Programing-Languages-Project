@@ -19,8 +19,8 @@ Program Listing of \f(CW\$1\fR
 .de SOURCE ..
 .
 .TS H
-center doublebox;
-L.
+doublebox;
+Lx.
 .TH
 T{
 .gcolor black
