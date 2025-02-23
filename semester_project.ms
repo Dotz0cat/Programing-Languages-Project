@@ -10,7 +10,7 @@ delim $$
 .
 .LP
 .ce
-Program Listing of \f(CW\$1\fR
+Program Listing of \FCW\$1\F[]
 .
 ...
 .ec

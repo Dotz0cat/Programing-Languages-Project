@@ -22,7 +22,7 @@ How do you create a basic hello world program?
 .
 .LP
 .ce
-Complation steps of \f(CWhello.f90\fR
+Complation steps of \FChello.f90\F[]
 .
 .TS H
 doublebox;
@@ -38,25 +38,25 @@ Fixed form was meant for punched cards.
 While free form is less strict in its formatting.
 Free form source code was added in Fortran 90.
 Due to this,
-most free form source code has the file extension \f(CWf90\fR.
+most free form source code has the file extension \FCf90\F[].
 .
 .PP
-Every Fortran program begins with \f(CWprogram [Name]\fR.
-Every Fortran program also ends with \f(CWend program [Name]\fR.
-\f(CWName\fR is optional on the end statement.
-After that you have your \f(CWuse\fR statements.
+Every Fortran program begins with \FCprogram [Name]\F[].
+Every Fortran program also ends with \FCend program [Name]\F[].
+\FCName\F[] is optional on the end statement.
+After that you have your \FCuse\F[] statements.
 Since this is \*QHello World!\*U, none is needed.
 Next is your option to turn the imlicit features of the language off.
-Most programs should use \f(CWimplicit none\fR.
+Most programs should use \FCimplicit none\F[].
 There is almost no reason that a new modern Fortran program should use
 the implicit features of the language.
-After this next there is \f(CWprint *, \(aqHello World!\(aq\fR.
-\f(CWprint\fR tells the processor that it needs to print.
-The \f(CW*\fR tells \f(CWprint\fR that it needs to print to the default unit.
-\f(CW\(aqHello World!\(aq\fR is the string to be printed.
+After this next there is \FCprint *, \(aqHello World!\(aq\F[].
+\FCprint\F[] tells the processor that it needs to print.
+The \FC*\fR tells \FCprint\F[] that it needs to print to the default unit.
+\FC\(aqHello World!\(aq\F[] is the string to be printed.
 .
 .PP
-This \*QHello World!\*U program is stored into \f(CWhello.f90\fR.
+This \*QHello World!\*U program is stored into \FChello.f90\F[].
 To compile this file into a runable program,
 you call a compiler like gfortran to compile and link it.
 Gfortran, part of the GNU Compiler Collection (GCC), is just
@@ -64,12 +64,12 @@ one example of a Fortran compiler.
 There is also iFort (Intel\(cqs Fortran compiler),
 Flang (The LLVM project\(cqs Fortran compiler),
 nAGfor (From nAG).
-After compiling the file \f(CWhello.f90\fR is transformed into a runable
-program \f(CWhello\fR.
+After compiling the file \FChello.f90\F[] is transformed into a runable
+program \FChello\F[].
 .
 .LP
 .ce
-Output of the \f(CWhello\fR program
+Output of the \FChello\F[] program
 .
 .TS H
 doublebox;
@@ -84,9 +84,9 @@ Intrinsics
 .PP
 Fortran does not have a standard library like other programming languages.
 Instead of having standard library functions Fortran has intrinsics.
-Examples of intrinsics are \f(CWprint\fR,
-\f(CWwrite\fR,
-and \f(CWread\fR
+Examples of intrinsics are \FCprint\F[],
+\FCwrite\F[],
+and \FCread\F[]
 .
 .NH 2
 Modules
@@ -113,14 +113,14 @@ Using modules
 .SOURCE use_mod.ms
 .
 .PP
-Modules almost always should begin with \f(CWimplcit none\fR.
+Modules almost always should begin with \FCimplcit none\F[].
 In modules you can set if something is exported or not.
-This is done by setting something to either \f(CWpublic\fR or \f(CWprivate\fR.
+This is done by setting something to either \FCpublic\F[] or \FCprivate\F[].
 When there is a procedure (function or subroutine) that you want to use outside of
 a module,
 it needs to have an explicit interface.
 An interface is just a delecration of what a procedure takes.
-Think of it like a \f(CWC\fR prototype.
+Think of it like a \FCC\F[] prototype.
 .
 .NH 2
 Submodules
@@ -134,11 +134,11 @@ potentially making complation faster.
 .
 .PP
 Submodules can be made by using
-\f(CWsubmodule (super) sub\fR.
+\FCsubmodule (super) sub\F[].
 For extending submodules you can use
-\f(CWsubmodule (super:sub) sub2\fR.
+\FCsubmodule (super:sub) sub2\F[].
 So on and so forth
-\f(CWsubmodule (super:sub) sub3\fR.
+\FCsubmodule (super:sub) sub3\F[].
 .
 .LP
 .ce
@@ -163,10 +163,10 @@ Functions are useful for breaking up your code into functions that return someth
 .
 .PP
 A functions can be declared by
-\f(CWTYPE function NAME([arguments]...) result(RETURN)\fR.
+\FCTYPE function NAME([arguments]...) result(RETURN)\F[].
 Functions are ended by
-\f(CWend function NAME\fR.
-The \f(CWresult(RETURN)\fR is not required.
+\FCend function NAME\F[].
+The \FCresult(RETURN)\F[] is not required.
 If it is not specified,
 then the variable that you return from is the same name as the function.
 .
@@ -187,13 +187,13 @@ Subroutines
 .
 .PP
 Subroutines are used for breaking your code into procedures that do not return anything.
-They can be compared to void functions in \f(CWC\fR.
+They can be compared to void functions in \FCC\F[].
 .
 .PP
 A subroutine can be decalred by
-\f(CWsubroutine NAME([arguments]...)\fR.
+\FCsubroutine NAME([arguments]...)\F[].
 As same as functions subroutines are ended by
-\f(CWend subroutine NAME\fR.
+\FCend subroutine NAME\F[].
 .
 .LP
 .ce
@@ -214,7 +214,7 @@ You must also declare the intent of your arguments.
 Center doublebox tab(#);
 C s
 Cb Cb
-Cf(CW) L.
+Cf(CR) L.
 Types of intent#
 Type#Description
 intent(in)#access in only
@@ -247,11 +247,11 @@ Arrays
 .
 .PP
 Arrays are declared by using
-\f(CWTYPE,\~dimension(SIZE)\~::\~NAME\fR.
+\FCTYPE,\~dimension(SIZE)\~::\~NAME\F[].
 Also can be used is
-\f(CWTYPE :: NAME(SIZE)\fR.
+\FCTYPE :: NAME(SIZE)\F[].
 In procedure interfaces,
-it is not uncommon to replace \fISIZE\fR with \fI:\fR.
+it is not uncommon to replace \f(CISIZE\f(TR with \f(CI:\f(TR.
 This specifies that any size could be passed.
 .
 .LP
@@ -288,7 +288,7 @@ you should deallocate the memory that you are done with.
 .
 .PP
 To deallocate memory you use
-\f(CWdeallocate(NAME)\fR.
+\FCdeallocate(NAME)\F[].
 .
 .NH 2
 Derived Types
@@ -296,7 +296,7 @@ Derived Types
 .PP
 Sometimes you have some structured data.
 For example you have multiple variables that are intertwined with each other.
-In \f(CWC\fR you could define a \f(CWstruct\fR for this.
+In \FCC\F[] you could define a \FCstruct\F[] for this.
 In Fortran,
 you would define a derived type.
 .
@@ -315,7 +315,7 @@ Derived type variable declaration example
 .SOURCE derived_type_use.ms
 .
 .PP
-You can access the internals of the derived type by using \f(CW%\fR.
+You can access the internals of the derived type by using \FC%\F[].
 .
 .LP
 .ce

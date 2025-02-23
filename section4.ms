@@ -35,7 +35,7 @@ Data type#Description
 _
 .TH
 .T&
-Lf(CW) C.
+Lf(CR) C.
 Integer#T{
 \&
 T}
@@ -60,12 +60,12 @@ T}
 center doublebox tab(#);
 Cb s s, C s s, Cb Cb Cb.
 Fortran Kind Types
-taken from iso_fortran_env
+taken from \FCiso_fortran_env\F[]
 Kind#C equivlent#Description
 _
 .TH
 .T&
-Lf(CW) Lf(CW) C.
+Lf(CR) Lf(CR) C.
 int8#signed char#T{
 8 bit signed integer
 T}

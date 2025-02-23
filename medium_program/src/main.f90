@@ -11,11 +11,11 @@ program calculator
 
     integer :: operation
 
-    call get_operation(operation)
-
     call get_number(a)
     call get_number(b)
 
+    call get_operation(operation)
+    
     select case(operation)
         case (1)
             after = add_numbers(a, b)
@@ -29,7 +29,11 @@ program calculator
             print *, "invalid operation"
     end select
 
-    print *, "the end is ", after
+    if (after .eq. huge(0.0)) then
+        return
+    end if
+
+    print *, "The result of the calculation is: ", after
 
 end program calculator
 
