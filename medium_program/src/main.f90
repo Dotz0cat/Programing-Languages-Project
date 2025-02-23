@@ -1,4 +1,3 @@
-! Somethiing something comment
 program calculator
     use input
     use processing

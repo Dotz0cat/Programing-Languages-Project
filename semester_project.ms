@@ -10,7 +10,7 @@ delim $$
 .
 .LP
 .ce
-Program Listing of \FCW\$1\F[]
+Program Listing of \FC\$1\F[]
 .
 ...
 .ec
@@ -307,6 +307,11 @@ Introduction \(em What is the goal of this section?
 .LP
 \s(18\fBReferences\fR\s0
 .
+.sp
+.LP
+\s(18\fBAppendix A: MEDIUM IMPLEMENTATION SOURCE CODE\fR\s0
+.
+.
 .bp
 .
 .\"introduction"
@@ -340,7 +345,9 @@ Introduction \(em What is the goal of this section?
 .\"references"
 .so references.ms
 .
-.\"apendix here if needed"
+.bp
+.\"appendix A"
+.so appendixA.ms
 .
 .
 
