@@ -22,7 +22,7 @@ MEDIUM_DIR = medium_program/src
 
 PREPARED_DIR = prepared_code_examples
 
-INCLUDEDIRS = $(WILDCARD $(PREPARED_DIR)/medium $(PREPARED_DIR)/section*)
+INCLUDEDIRS = $(PREPARED_DIR)/medium $(PREPARED_DIR)/section3 $(PREPARED_DIR)/section4 $(PREPARED_DIR)/section5
 IFLAGS = $(addprefix -I, $(INCLUDEDIRS))
 
 semester_project.pdf: semester_project.ms $(SECTIONS) $(PREPARED_SOURCES) \
@@ -32,6 +32,7 @@ semester_project.pdf: semester_project.ms $(SECTIONS) $(PREPARED_SOURCES) \
 .PHONEY: clean
 
 clean:
+	@-rm -r $(PREPARED_DIR)
 	@-rm semester_project.pdf
 
 $(PREPARED_DIR)/section3/%.ms: $(SRCSDIR)/section3/%.f90 | $(PREPARED_DIR)/section3
@@ -49,7 +50,13 @@ $(PREPARED_DIR)/medium/%.ms: $(MEDIUM_DIR)/%.f90 | $(PREPARED_DIR)/medium
 $(PREPARED_DIR):
 	mkdir $(PREPARED_DIR)
 
-$(PREPARED_DIR)/section%: | $(PREPARED_DIR)
+$(PREPARED_DIR)/section3: | $(PREPARED_DIR)
+	mkdir $@
+
+$(PREPARED_DIR)/section4: | $(PREPARED_DIR)
+	mkdir $@
+
+$(PREPARED_DIR)/section5: | $(PREPARED_DIR)
 	mkdir $@
 
 $(PREPARED_DIR)/medium: | $(PREPARED_DIR)
