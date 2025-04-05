@@ -3,32 +3,54 @@ SECTIONS = section1.ms section2.ms section3.ms \
 		   section4.ms section5.ms section6.ms \
 		   section7.ms references.ms appendixA.ms
 
-PREPARED_SOURCES = hello.ms program_contains.ms basic_mod.ms \
+PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
+				   hello.ms program_contains.ms basic_mod.ms \
 				   use_mod.ms subroutine.ms function.ms function_alt.ms \
 				   interface.ms interface_overload.ms submodule.ms \
 				   numbers_p.ms arrays.ms allocatable_array.ms \
-				   derived_type.ms derived_type_use.ms derived_type_assign.ms \
+				   derived_type.ms derived_type_use.ms derived_type_assign.ms ) \
+				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
-				   procedure_medium.ms divide_numbers.ms
+				   procedure_medium.ms divide_numbers.ms )
 
-PREPARED_MEDIUM_SOURCES = main.ms input.ms input_implations.ms processing.ms \
-						  processing_sub.ms
+PREPARED_MEDIUM_SOURCES = $(addprefix $(PREPARED_DIR)/medium/, \
+						  main.ms input.ms input_implations.ms processing.ms \
+						  processing_sub.ms )
 
 SRCSDIR = code_examples
 MEDIUM_DIR = medium_program/src
 
+PREPARED_DIR = prepared_code_examples
+
+INCLUDEDIRS = $(WILDCARD $(PREPARED_DIR)/medium $(PREPARED_DIR)/section*)
+IFLAGS = $(addprefix -I, $(INCLUDEDIRS))
+
 semester_project.pdf: semester_project.ms $(SECTIONS) $(PREPARED_SOURCES) \
 	$(PREPARED_MEDIUM_SOURCES)
-	soelim semester_project.ms | tbl | eqn -T pdf | groff -U -ms -T pdf > semester_project.pdf
+	soelim semester_project.ms | tbl | eqn -T pdf | groff -U $(IFLAGS) -ms -T pdf > semester_project.pdf
 
 .PHONEY: clean
 
 clean:
 	@-rm semester_project.pdf
 
-%.ms: $(SRCSDIR)/%.f90
+$(PREPARED_DIR)/section3/%.ms: $(SRCSDIR)/section3/%.f90 | $(PREPARED_DIR)/section3
 	source-highlight -f groff_mm_color -i $< -o $@
 
-%.ms: $(MEDIUM_DIR)/%.f90
+$(PREPARED_DIR)/section4/%.ms: $(SRCSDIR)/section4/%.f90 | $(PREPARED_DIR)/section4
 	source-highlight -f groff_mm_color -i $< -o $@
 
+$(PREPARED_DIR)/section5/%.ms: $(SRCSDIR)/section5/%.f90 | $(PREPARED_DIR)/section5
+	source-highlight -f groff_mm_color -i $< -o $@
+
+$(PREPARED_DIR)/medium/%.ms: $(MEDIUM_DIR)/%.f90 | $(PREPARED_DIR)/medium
+	source-highlight -f groff_mm_color -i $< -o $@
+
+$(PREPARED_DIR):
+	mkdir $(PREPARED_DIR)
+
+$(PREPARED_DIR)/section%: | $(PREPARED_DIR)
+	mkdir $@
+
+$(PREPARED_DIR)/medium: | $(PREPARED_DIR)
+	mkdir $@

@@ -19,7 +19,16 @@ Stuff
 Paradigm
 .
 .PP
-Stuff
+As with many programing languages,
+Fortran doesn't support just one paradigm.
+It supports multiple.
+Fortran mainly follows the impretative paradigm.
+It also supports structured programing,
+procedual programing,
+array programing,
+generic programing,
+and object-oriented programing.
+This lets the language be used in many diffrent ways.
 .
 .NH 2
 Data Types
@@ -37,22 +46,22 @@ _
 .T&
 Lf(CR) C.
 Integer#T{
-\&
+numeric type
 T}
 Real#T{
-\&
+Floating point numeric type
 T}
 Complex#T{
-\&
+Complex floating point numeric type
 T}
 Logical#T{
-\&
+A boolean type
 T}
 Character#T{
-\&
+Character types
 T}
 Derived Type#T{
-\&
+User defined type
 T}
 .TE
 .
@@ -93,7 +102,35 @@ T}
 Control Flow
 .
 .PP
-Stuff
+Fortran provides multiple kinds of control flow.
+.
+.NH 3
+If then
+.
+.PP
+Fortran provides an if statement.
+It is used to change the flow of a program upon a condition being true.
+.
+.\"example here
+.
+.NH 3
+Select case
+.
+.PP
+Fortran provides a \F[C]select case\F[] statement.
+This behaves like a \F[C]switch\F[] in \F[C]C\F[].
+.
+.\"example here
+.
+.NH 3
+Do construct
+.
+.PP
+Fortran provides a \F[C]do\F[] construct.
+It is equvilent to a \F[C]for\F[] loop in \F[C]C\F[].
+Notice that Fortran does not provide a while loop.
+.
+.\"example here
 .
 .NH 2
 Expressions
