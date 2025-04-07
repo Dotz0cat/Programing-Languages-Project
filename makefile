@@ -9,6 +9,10 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   interface.ms interface_overload.ms submodule.ms \
 				   numbers_p.ms arrays.ms allocatable_array.ms \
 				   derived_type.ms derived_type_use.ms derived_type_assign.ms ) \
+				   $(addprefix $(PREPARED_DIR)/section4/, \
+				   if_then.ms if_elif.ms if_else.ms select_case.ms \
+				   select_range.ms select_case_ranges.ms \
+				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
 				   procedure_medium.ms divide_numbers.ms )

@@ -111,7 +111,11 @@ If then
 Fortran provides an if statement.
 It is used to change the flow of a program upon a condition being true.
 .
-.\"example here
+.SOURCE if_then.ms
+.
+.SOURCE if_else.ms
+.
+.SOURCE if_elif.ms
 .
 .NH 3
 Select case
@@ -120,7 +124,11 @@ Select case
 Fortran provides a \F[C]select case\F[] statement.
 This behaves like a \F[C]switch\F[] in \F[C]C\F[].
 .
-.\"example here
+.SOURCE select_case.ms
+.
+.SOURCE select_range.ms
+.
+.SOURCE select_case_ranges.ms
 .
 .NH 3
 Do construct
@@ -130,7 +138,13 @@ Fortran provides a \F[C]do\F[] construct.
 It is equvilent to a \F[C]for\F[] loop in \F[C]C\F[].
 Notice that Fortran does not provide a while loop.
 .
-.\"example here
+.SOURCE do.ms
+.
+.SOURCE do_step.ms
+.
+.SOURCE do_while_eqiv.ms
+.
+.SOURCE depracated_while.ms
 .
 .NH 2
 Expressions
