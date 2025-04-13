@@ -51,7 +51,7 @@ T}
 .LP
 .ce
 .
-\s(18\fBA Report on the Fortran Programming Language\fR\s0
+\s(18\fBA Report on the Fortran 23 Programming Language\fR\s0
 .
 .sp 29
 .
