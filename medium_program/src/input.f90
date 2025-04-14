@@ -5,26 +5,19 @@ module input
     
     private
 
-    public :: get_number
-    public :: get_operation
+    public :: get_user_input
     public :: lex
 
-    interface get_number
-        module subroutine get_number(num)
-            real, intent(out) :: num
-        end subroutine get_number
-    end interface get_number
-
-    interface get_operation
-        module subroutine get_operation(operation)
-            integer, intent(out) :: operation
-        end subroutine get_operation
-    end interface get_operation
+    interface get_user_input
+        module subroutine get_user_input(line)
+            character(*), intent(out), allocatable :: line
+        end subroutine get_user_input
+    end interface get_user_input
 
     interface lex
-        module subroutine lex(line, output_stack)
+        module subroutine lex(line, values)
             character(*), intent(in) :: line
-            class(stack), intent(out), allocatable :: output_stack
+            class(stack), intent(out), allocatable :: values
         end subroutine lex
     end interface lex
 

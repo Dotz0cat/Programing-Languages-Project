@@ -4,6 +4,7 @@ submodule (parse_mod) parse_sub
     use terminal_mod
     use state_mod
     use action_mod
+    use ast_mod
     implicit none
     
     ! beware there are dragons
@@ -163,6 +164,7 @@ contains
         this%input_token_stack = input_stack
         allocate(this%working_token_stack)
         allocate(this%state_stack)
+        allocate(this%ast)
     end procedure set_input_stack
 
     module procedure parse_tokens
@@ -181,13 +183,14 @@ contains
             if (state .eq. STATE_REJECT .OR. state .eq. STATE_ACCEPT) exit
             call this%input_token_stack%peek(peek_tok)
             la_tok = token_to_term(peek_tok%meaning)
+            deallocate(peek_tok)
             action = lookup_action(la_tok, state)
-            !print *, 'state: ', state, ' token: ', la_tok, ' action: ', action
             call this%do_action(state, action)
         end do
 
         if (state .eq. STATE_ACCEPT) then
             print *, "parse accepted"
+            this%accepted = .true.
         end if
 
         if (state .eq. STATE_REJECT) then
@@ -261,18 +264,36 @@ contains
         integer(state_type) :: former_state
 
         class(token), allocatable :: tok
+        class(ast_node_base), pointer :: ast_node
+        class(ast_node_base), pointer :: ast_node_2
 
         select case (action)
             case (REDUCE_1)
                 ! pop expr reduce to stmt
+                allocate(ast_node_stmt :: ast_node)
+                
+                ! expr
                 call this%working_token_stack%pop(tok)
+                select type (st => ast_node)
+                    class is (ast_node_stmt)
+                        select type (e => tok%value)
+                            class is (ast_node_expr)
+                                st%expr => e
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_stmt
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_stmt, former_state)
                 state = new_state
@@ -280,20 +301,49 @@ contains
                 call this%state_stack%push('R1', new_state)
             case (REDUCE_2)
                 ! pop expr PLUS term reduce to expr
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_plus :: ast_node)
 
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type(ast_node)
+                    class is (ast_node_plus)
+                        select type (t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%right => t
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! PLUS
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! expr
                 call this%working_token_stack%pop(tok)
+                select type(ast_node)
+                    class is (ast_node_plus)
+                        select type (e => tok%value)
+                            class is (ast_node_expr)
+                                ast_node%left => e
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_expr
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_expr, former_state)
                 state = new_state
@@ -301,20 +351,49 @@ contains
                 call this%state_stack%push('R2', new_state)
             case (REDUCE_3)
                 ! pop expr MINUS term reduce to expr
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_minus :: ast_node)
 
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type(ast_node)
+                    class is (ast_node_minus)
+                        select type (t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%right => t
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! MINUS
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! expr
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_minus)
+                        select type (e => tok%value)
+                            class is (ast_node_expr)
+                                ast_node%left => e
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_expr
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_expr, former_state)
                 state = new_state
@@ -322,18 +401,31 @@ contains
                 call this%state_stack%push('R3', new_state)
             case (REDUCE_4)
                 ! pop term reduce to expr
+                allocate(ast_node_expr :: ast_node)
+
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_expr)
+                        select type (t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%expr => t
+                        end select
+                end select
                 deallocate(tok)
+                
                 call this%state_stack%pop(tok)
                 deallocate(tok)
-                !stuff here
+                
                 allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_expr
                 call this%working_token_stack%push(tok)
                 deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_expr, former_state)
                 state = new_state
@@ -341,19 +433,30 @@ contains
                 call this%state_stack%push('R4', new_state)
             case (REDUCE_5)
                 ! pop factor reduce to term
+                allocate(ast_node_term :: ast_node)
+
+                ! factor
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_term)
+                        select type (f => tok%value)
+                            class is (ast_node_factor)
+                                ast_node%factor => f
+                        end select
+                end select
                 deallocate(tok)
                 call this%state_stack%pop(tok)
                 deallocate(tok)
-                !stuff here
+
                 allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_term
                 call this%working_token_stack%push(tok)
                 deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_term, former_state)
                 state = new_state
@@ -361,19 +464,30 @@ contains
                 call this%state_stack%push('P5', new_state)
             case (REDUCE_6)
                 ! pop NUMBER reduce to factor
+                allocate(ast_node_factor :: ast_node)
+
+                ! NUMBER
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_factor)
+                        select type (n => tok%value)
+                            class is (ast_node_number)
+                                ast_node%expr => n
+                        end select
+                end select
                 deallocate(tok)
                 call this%state_stack%pop(tok)
                 deallocate(tok)
-                !stuff here
+
                 allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_factor
                 call this%working_token_stack%push(tok)
                 deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_factor, former_state)
                 state = new_state
@@ -381,15 +495,28 @@ contains
                 call this%state_stack%push('P6', new_state)
             case (REDUCE_7)
                 ! pop SIN reduce to funct
+                allocate(ast_node_funct :: ast_node)
+
+                ! SIN
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                select type (ast_node)
+                    class is (ast_node_funct)
+                        ast_node%funct = funct_SIN
+                end select
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_funct
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_funct, former_state)
                 state = new_state
@@ -397,15 +524,28 @@ contains
                 call this%state_stack%push('P7', new_state)
             case (REDUCE_8)
                 ! pop COS reduce to funct
+                allocate(ast_node_funct :: ast_node)
+
+                ! COS
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                select type (ast_node)
+                    class is (ast_node_funct)
+                        ast_node%funct = funct_COS
+                end select
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_funct
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_funct, former_state)
                 state = new_state
@@ -413,15 +553,28 @@ contains
                 call this%state_stack%push('P8', new_state)
             case (REDUCE_9)
                 ! pop TAN reduce to funct
+                allocate(ast_node_funct :: ast_node)
+
+                ! TAN
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+                
+                select type (ast_node)
+                    class is (ast_node_funct)
+                        ast_node%funct = funct_TAN
+                end select
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_funct
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_funct, former_state)
                 state = new_state
@@ -429,15 +582,28 @@ contains
                 call this%state_stack%push('P9', new_state)
             case (REDUCE_10)
                 ! pop SQRT reduce to funct
+                allocate(ast_node_funct :: ast_node)
+
+                ! SQRT
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                select type (ast_node)
+                    class is (ast_node_funct)
+                        ast_node%funct = funct_SQRT
+                end select
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_funct
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_funct, former_state)
                 state = new_state
@@ -445,15 +611,28 @@ contains
                 call this%state_stack%push('P10', new_state)
             case (REDUCE_11)
                 ! pop LOG reduce to term
+                allocate(ast_node_funct :: ast_node)
+
+                ! LOG
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                select type (ast_node)
+                    class is (ast_node_funct)
+                        ast_node%funct = funct_LOG
+                end select
+
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_funct
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_funct, former_state)
                 state = new_state
@@ -461,15 +640,37 @@ contains
                 call this%state_stack%push('P11', new_state)
             case (REDUCE_12)
                 ! pop MINUS factor reduce to factor
+                allocate(ast_node_uniminus :: ast_node)
+
+                ! factor
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_uniminus)
+                        select type (f => tok%value)
+                            class is (ast_node_factor)
+                                ast_node%value => f
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
-                !stuff here
+                deallocate(tok)
+
+                ! MINUS
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
+                
+                ! uniminus is a factor
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_factor
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
-
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_factor, former_state)
                 state = new_state
@@ -477,20 +678,50 @@ contains
                 call this%state_stack%push('P12', new_state)
             case (REDUCE_13)
                 ! pop term TIMES factor reduce to term
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_times :: ast_node)
 
+                ! factor
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_times)
+                        select type(f => tok%value)
+                            class is (ast_node_factor)
+                                ast_node%right => f
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! times
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_times)
+                        select type(t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%left => t
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                ! ast_node_times is a term
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_term
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_term, former_state)
                 state = new_state
@@ -498,20 +729,50 @@ contains
                 call this%state_stack%push('P13', new_state)
             case (REDUCE_14)
                 ! pop term DIVIDE factor reduce to term
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_divide :: ast_node)
 
+                ! factor
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_divide)
+                        select type(f => tok%value)
+                            class is (ast_node_factor)
+                                ast_node%right => f
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! DIVIDE
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_divide)
+                        select type(t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%left => t
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                ! ast_node_divide is a term
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_term
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_term, former_state)
                 state = new_state
@@ -519,20 +780,50 @@ contains
                 call this%state_stack%push('P14', new_state)
             case (REDUCE_15)
                 ! pop term MODULO factor reduce to term
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_modulo :: ast_node)
 
+                ! factor
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_modulo)
+                        select type(f => tok%value)
+                            class is (ast_node_factor)
+                                ast_node%right => f
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! MODULO
+                call this%working_token_stack%pop(tok)
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! term
                 call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_modulo)
+                        select type(t => tok%value)
+                            class is (ast_node_term)
+                                ast_node%left => t
+                        end select
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                ! ast_node_modulo is a term
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_term
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_term, former_state)
                 state = new_state
@@ -540,20 +831,42 @@ contains
                 call this%state_stack%push('P15', new_state)
             case (REDUCE_16)
                 ! pop OPEN expr CLOSE reduce to factor
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
+                allocate(ast_node_factor :: ast_node)
 
+                ! CLOSE
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! expr
+                call this%working_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_factor)
+                        select type (e => tok%value)
+                            class is (ast_node_expr)
+                                ast_node%expr => e
+                        end select
+                end select
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! OPEN
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                allocate(tok)
+                tok%value => ast_node
                 tok%meaning = NON_TERMINAL_factor
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_factor, former_state)
                 state = new_state
@@ -561,23 +874,57 @@ contains
                 call this%state_stack%push('P16', new_state)
             case (REDUCE_17)
                 ! pop funct OPEN expr CLOSE reduce to factor
-                call this%working_token_stack%pop(tok)
-                call this%state_stack%pop(tok)
 
+                ! CLOSE
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
+
+                ! expr
+                call this%working_token_stack%pop(tok)
+                select type (e => tok%value)
+                    class is (ast_node_expr)
+                        ast_node => e
+                end select
+                deallocate(tok)
+                call this%state_stack%pop(tok)
+                deallocate(tok)
                 
+                ! OPEN
                 call this%working_token_stack%pop(tok)
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                ! funct
                 call this%working_token_stack%pop(tok)
+                select type (func => tok%value)
+                    class is (ast_node_funct)
+                        ast_node_2 => func 
+                end select
+                deallocate(tok)
                 call this%state_stack%pop(tok)
+                deallocate(tok)
 
+                select type (ast_node_2)
+                    class is (ast_node_funct)
+                        select type (ast_node)
+                            class is (ast_node_expr)
+                                ast_node_2%inner => ast_node
+                        end select
+                end select
+
+                ! funct is a factor
+                allocate(tok)
+                tok%value => ast_node_2
                 tok%meaning = NON_TERMINAL_factor
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
 
                 call this%state_stack%peek(tok)
                 former_state = tok%meaning
+                deallocate(tok)
 
                 new_state = lookup_goto(NON_TERMINAL_factor, former_state)
                 state = new_state
@@ -586,81 +933,114 @@ contains
             case (SHIFT_5)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
+
                 state = STATE_5
                 call this%state_stack%push('5', state)
             case (SHIFT_7)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
+
                 state = STATE_7
                 call this%state_stack%push('7', state)
             case (SHIFT_8)
+                ! SHIFT NUMBER
+                allocate(ast_node_number :: ast_node)
                 call this%input_token_stack%pop(tok)
+                select type (ast_node)
+                    class is (ast_node_number)
+                        select type (str => tok%value)
+                            type is (character(*))
+                                read(str, *) ast_node%number
+                        end select
+                end select
+                deallocate(tok)
+                
+                allocate(tok)
+                tok%value => ast_node
+                tok%meaning = TERMINAL_NUMBER
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
+
                 state = STATE_8
                 call this%state_stack%push('8', state)
             case (SHIFT_9)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_9
                 call this%state_stack%push('9', state)
             case (SHIFT_10)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_10
                 call this%state_stack%push('10', state)
             case (SHIFT_11)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_11
                 call this%state_stack%push('11', state)
             case (SHIFT_12)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_12
                 call this%state_stack%push('12', state)
             case (SHIFT_13)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_13
                 call this%state_stack%push('13', state)
             case (SHIFT_14)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_14
                 call this%state_stack%push('14', state)
             case (SHIFT_15)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_15
                 call this%state_stack%push('15', state)
             case (SHIFT_16)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_16
                 call this%state_stack%push('16', state)
             case (SHIFT_17)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_17
                 call this%state_stack%push('17', state)
             case (SHIFT_18)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_18
                 call this%state_stack%push('18', state)
             case (SHIFT_20)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_20
                 call this%state_stack%push('20', state)
             case (SHIFT_28)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_28
                 call this%state_stack%push('28', state)
             case (SHIFT_29)
                 call this%input_token_stack%pop(tok)
                 call this%working_token_stack%push(tok)
+                deallocate(tok)
                 state = STATE_29
                 call this%state_stack%push('29', state)
             case (GOTO_1)
@@ -706,6 +1086,12 @@ contains
 
                 state = STATE_REJECT
             case (ACCEPT)
+                ! pop stmt assign to ast
+                call this%working_token_stack%pop(tok)
+                select type (st => tok%value)
+                    class is (ast_node_stmt)
+                        this%ast%root => st
+                end select
 
                 state = STATE_ACCEPT
             case default
@@ -713,5 +1099,20 @@ contains
                 state = STATE_REJECT
         end select
     end subroutine do_action
+
+    module procedure perform_evaluation
+        value = this%ast%root%eval()
+    end procedure perform_evaluation
+
+    module procedure free_parse
+        deallocate(this%input_token_stack)
+        deallocate(this%working_token_stack)
+        deallocate(this%state_stack)
+        deallocate(this%ast)
+    end procedure free_parse
+
+    module procedure parse_success
+            parse_success = this%accepted
+    end procedure parse_success
 
 end submodule parse_sub

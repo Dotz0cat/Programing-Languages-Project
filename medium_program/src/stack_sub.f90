@@ -29,39 +29,25 @@ contains
         if (.not. allocated(this%token)) then
             allocate(this%token)
             allocate(this%token%value, source=i)
+            !this%token%value = i
             this%token%meaning = meaning
             return
         end if
         allocate(this%next)
         this%next%prev => this
         allocate(this%next%token)
-        this%next%token%value = i
+        allocate(this%next%token%value, source=i)
         this%next%token%meaning = meaning
     end procedure node_push
     
     module procedure node_token_push
         if (.not. allocated(this%token)) then
-            !select type ( q => tok%value )
-            !    type is (character(*))
-            !        this%value = q
-            !end select
-            !this%meaning = tok%meaning
             allocate(this%token, source=tok)
-            !this%token = tok
             return
         end if
         allocate(this%next)
         this%next%prev => this
-        !select type ( q => tok%value )
-        !    type is (character(*))
-        !        this%next%value = q
-        !end select
-        !this%next%value = tok%value
-        !this%next%meaning = tok%meaning
-
-        !this%next%token = tok
         allocate(this%next%token, source=tok)
-        !this%next%token = tok
     end procedure node_token_push
 
     module procedure stack_pop
@@ -87,15 +73,13 @@ contains
     end procedure stack_token_pop
 
     module procedure node_pop
-        !i = this%value
-        !meaning = this%meaning
-
         select type (q => this%token%value)
             type is (character(*))
-                i = q
+                allocate(i, source=q)
         end select
         meaning = this%token%meaning
-        
+        deallocate(this%token%value)
+
         if (associated(this%prev)) then
             this%prev%next => this%next
         end if
@@ -105,9 +89,6 @@ contains
     end procedure node_pop
 
     module procedure node_token_pop
-        !tok%value = this%token%value
-        !tok%meaning = this%token%meaning
-
         allocate(tok, source=this%token)
 
         if (associated(this%prev)) then
@@ -119,8 +100,6 @@ contains
     end procedure node_token_pop
 
     module procedure node_peek
-        !i = this%value
-        !meaning = this%meaning
         select type (q => this%token%value)
             type is (character(*))
                 i = q
@@ -129,8 +108,6 @@ contains
     end procedure node_peek
 
     module procedure node_token_peek
-        !tok%value = this%value
-        !tok%meaning = this%meaning
         allocate(tok, source=this%token)
     end procedure node_token_peek
 
@@ -193,9 +170,11 @@ contains
 
     module procedure stack_reverse
         class(token), allocatable :: tok
-        type(stack) :: temp_stack
+        class(stack), allocatable :: temp_stack
 
         if (.not. associated(this%head)) return
+
+        allocate(temp_stack)
         
         do
             if (this%is_empty()) exit
@@ -205,10 +184,19 @@ contains
 
         this%head => temp_stack%head
         nullify(temp_stack%head)
+        deallocate(temp_stack)
     end procedure stack_reverse
 
     module procedure stack_is_empty
         stack_is_empty = .not. associated(this%head)
     end procedure stack_is_empty
+
+    module procedure free_token
+        !if (associated(this%value)) then
+        !    deallocate(this%value)
+        !    nullify(this%value)
+        !end if
+    end procedure free_token
+
 end submodule stack_sub
 

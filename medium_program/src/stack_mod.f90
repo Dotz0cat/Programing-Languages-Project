@@ -67,15 +67,11 @@ module stack_mod
     end type
 
     type, public :: token
-        class(*), allocatable :: value
-        !character(len=:), allocatable :: value
-        !integer, kind :: enum_kind
+        class(*), pointer :: value
         integer(token_type) :: meaning
+    contains
+        final :: free_token
     end type token
-
-    !interface token
-    !    procedure :: create_token
-    !end interface token
 
     interface stack_push
         module subroutine stack_push(this, i, meaning)
@@ -110,7 +106,7 @@ module stack_mod
     interface stack_pop
         module subroutine stack_pop(this, i, meaning)
             class(stack), intent(inout) :: this
-            character(*), intent(out) :: i
+            character(*), intent(out), allocatable :: i
             integer(token_type), intent(out) :: meaning
         end subroutine stack_pop
     end interface stack_pop
@@ -125,7 +121,7 @@ module stack_mod
     interface node_pop
         module subroutine node_pop(this, i, meaning)
             class(node), intent(inout) :: this
-            character(*), intent(out) :: i
+            character(*), intent(out), allocatable :: i
             integer(token_type), intent(out) :: meaning
         end subroutine node_pop
     end interface node_pop
@@ -217,5 +213,12 @@ module stack_mod
             logical :: stack_is_empty
         end function stack_is_empty
     end interface stack_is_empty
+
+    interface free_token
+        module subroutine free_token(this)
+            type(token), intent(inout) :: this
+        end subroutine free_token
+    end interface free_token
+
 end module stack_mod
 

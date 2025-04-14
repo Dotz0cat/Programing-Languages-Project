@@ -1,5 +1,5 @@
 FC = gfortran
-CFLAGS = -O0 -g -Wall -Wextra 
+CFLAGS = -O2 -g -Wall -Wextra
 #-fsanitize=address
 CPPFLAGS = -I $(MODDIR)
 #LDLIBS
@@ -12,6 +12,7 @@ build: $(OBJDIR) $(MODDIR) program
 
 program: $(OBJDIR)/token.o $(OBJDIR)/terminal_mod.o \
 	$(OBJDIR)/state_mod.o $(OBJDIR)/action_mod.o \
+	$(OBJDIR)/ast_mod.o $(OBJDIR)/ast_sub.o \
 	$(OBJDIR)/stack_mod.o $(OBJDIR)/stack_sub.o \
 	$(OBJDIR)/parse_mod.o $(OBJDIR)/parse_sub.o \
 	$(OBJDIR)/input.o $(OBJDIR)/input_implations.o \

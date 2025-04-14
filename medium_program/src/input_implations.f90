@@ -15,24 +15,15 @@ submodule (input) input_imp
         enumerator :: error
     end enum
 contains
-    module procedure get_number
-        print '(A$)', "Enter a number: "
-        read (*, *) num
-    end procedure get_number
-
-    module procedure get_operation
-        print *, "1. add"
-        print *, "2. subtract"
-        print *, "3. multiply"
-        print *, "4. divide"
-        print '(A$)', "Choose operation: "
-        read (*, *) operation
-    end procedure get_operation
+    module procedure get_user_input
+        allocate(line)
+        print '(A$)', "Enter calculation to perform: "
+        read (*, '(A)') line
+    end procedure get_user_input
 
     module procedure lex
         integer :: i
         integer(kind(accepting)) :: state
-        type(stack), pointer :: values
         integer :: open_parns, close_parns
         character(len=256), allocatable :: holder
         integer :: holder_index
@@ -49,6 +40,9 @@ contains
         line_len = len(line)
         allocate(holder)
         allocate(values)
+
+        ! a fix for my grammar that reconizes (a + b) but not a + b
+        call values%push('(', OPEN)
 
         do
             if (i .le. line_len) then
@@ -137,7 +131,7 @@ contains
                             case default
                                 state = error
                         end select
-                    case (' ')
+                    case (' ', '\n', '\t')
                         select case (state)
                             case (accepting_number)
                                 state = done_number
@@ -200,14 +194,11 @@ contains
             print *, 'There was an issue with the parthacies'
         end if
 
+        ! a fix for my grammar that reconizes (a + b) but not a + b
+        call values%push(')', CLOSE)
+
         call values%push('$', END)
         
-        call values%print()
-
-        !deallocate(values)
-
-        output_stack = values
-
         deallocate(holder)
     end procedure lex
 
