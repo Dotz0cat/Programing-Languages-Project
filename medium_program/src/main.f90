@@ -24,6 +24,8 @@ program calculator
 
     if (parser%parse_success()) then
         print *, 'Your result is', parser%perform_evaluation()
+    else
+        print *, 'error parsing your expression'
     end if
 
     deallocate(parser)

@@ -189,12 +189,7 @@ contains
         end do
 
         if (state .eq. STATE_ACCEPT) then
-            print *, "parse accepted"
             this%accepted = .true.
-        end if
-
-        if (state .eq. STATE_REJECT) then
-            print *, "parse rejected"
         end if
 
     end procedure parse_tokens

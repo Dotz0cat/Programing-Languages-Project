@@ -89,7 +89,9 @@ contains
     end procedure node_pop
 
     module procedure node_token_pop
-        allocate(tok, source=this%token)
+        allocate(tok)
+        tok%value => this%token%value
+        tok%meaning = this%token%meaning
 
         if (associated(this%prev)) then
             this%prev%next => this%next
