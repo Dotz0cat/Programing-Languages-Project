@@ -15,11 +15,13 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
-				   procedure_medium.ms divide_numbers.ms )
+				   procedure_medium.ms grammar.ms )
 
 PREPARED_MEDIUM_SOURCES = $(addprefix $(PREPARED_DIR)/medium/, \
-						  main.ms input.ms input_implations.ms processing.ms \
-						  processing_sub.ms )
+						  main.ms input.ms input_implations.ms action_mod.ms \
+						  token.ms terminal_mod.ms state_mod.ms \
+						  parse_mod.ms parse_sub.ms ast_mod.ms ast_sub.ms \
+						  stack_mod.ms stack_sub.ms )
 
 SRCSDIR = code_examples
 MEDIUM_DIR = medium_program/src
@@ -40,16 +42,19 @@ clean:
 	@-rm semester_project.pdf
 
 $(PREPARED_DIR)/section3/%.ms: $(SRCSDIR)/section3/%.f90 | $(PREPARED_DIR)/section3
-	source-highlight -f groff_mm_color -i $< -o $@
+	source-highlight -f groff_ms_color -i $< -o $@ --outlang-def=groff_ms_color.outlang
 
 $(PREPARED_DIR)/section4/%.ms: $(SRCSDIR)/section4/%.f90 | $(PREPARED_DIR)/section4
-	source-highlight -f groff_mm_color -i $< -o $@
+	source-highlight -f groff_ms_color -i $< -o $@ --outlang-def=groff_ms_color.outlang
 
 $(PREPARED_DIR)/section5/%.ms: $(SRCSDIR)/section5/%.f90 | $(PREPARED_DIR)/section5
-	source-highlight -f groff_mm_color -i $< -o $@
+	source-highlight -f groff_ms_color -i $< -o $@ --outlang-def=groff_ms_color.outlang
+
+$(PREPARED_DIR)/section5/%.ms: $(SRCSDIR)/section5/%.y | $(PREPARED_DIR)/section5
+	source-highlight -f groff_ms_color -i $< -o $@ --outlang-def=groff_ms_color.outlang
 
 $(PREPARED_DIR)/medium/%.ms: $(MEDIUM_DIR)/%.f90 | $(PREPARED_DIR)/medium
-	source-highlight -f groff_mm_color -i $< -o $@
+	source-highlight -f groff_ms_color -i $< -o $@ --outlang-def=groff_ms_color.outlang
 
 $(PREPARED_DIR):
 	mkdir $(PREPARED_DIR)

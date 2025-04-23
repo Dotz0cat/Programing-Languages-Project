@@ -18,17 +18,11 @@ Program Listing of \FC\$1\F[]
 .eo
 .de SOURCE ..
 .
-.TS H
-doublebox;
-Lx.
-.TH
-T{
+\l'6.5i'\h'-6.5i'\v'-0.2v'\l'6.5i'\v'0.2v'
+.so \$1
+\"
 .gcolor black
-. so \$1
-
-T}
-.gcolor black
-.TE
+\l'6.5i'\h'-6.5i'\v'-0.2v'\l'6.5i'\v'0.2v'
 .
 ...
 .ec
@@ -44,6 +38,8 @@ T}
 .
 ...
 .ec
+.
+.\"\X'papersize=8.5i,11i'
 .
 \&
 .sp 8
@@ -346,8 +342,18 @@ Introduction \(em What is the goal of this section?
 .so references.ms
 .
 .bp
+.
+.\"\X'papersize=11i,8.5i'
+.
+.\".nr LL 9i
+.\".pl 8.5i
+.
 .\"appendix A"
 .so appendixA.ms
 .
+.\".nr LL 6.5i
+.\".pl 11i
+.
+.\"\X'papersize=8.5i,11i'
 .
 
