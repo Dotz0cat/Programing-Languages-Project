@@ -1,0 +1,27 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install groff and source-highlight
+      run: sudo apt-get update && sudo apt-get install -y groff source-highlight
+     
+    - name: Build PDF
+      run: make
+
+    - name: Upload PDF artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: groff-pdf
+        path: semester_project.pdf
