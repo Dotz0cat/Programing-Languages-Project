@@ -23,5 +23,5 @@ jobs:
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v4
       with:
-        name: groff-pdf
+        name: semester_project.pdf
         path: semester_project.pdf
