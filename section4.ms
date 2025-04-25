@@ -221,22 +221,22 @@ _
 .T&
 Lf(CR) C.
 Integer#T{
-numeric type
+Numeric Type
 T}
 Real#T{
-Floating point numeric type
+Floating point numeric Type
 T}
 Complex#T{
-Complex floating point numeric type
+Complex floating point numeric Type
 T}
 Logical#T{
-A boolean type
+A Boolean Type
 T}
 Character#T{
-Character types
+Character Types
 T}
 Derived Type#T{
-User defined type
+User-Defined Type
 T}
 .TE
 .
@@ -244,32 +244,32 @@ T}
 center doublebox tab(#);
 Cb s s, C s s, Cb Cb Cb.
 Fortran Kind Types
-taken from \FCiso_fortran_env\F[]
-Kind#C equivlent#Description
+Taken from \FCiso_fortran_env\F[]
+Kind#C Equivalent#Description
 _
 .TH
 .T&
 Lf(CR) Lf(CR) C.
 int8#signed char#T{
-8 bit signed integer
+8-Bit signed Integer
 T}
 int16#signed short#T{
-16 bit signed integer
+16-Bit signed Integer
 T}
 int32#signed int#T{
-32 bit signed integer
+32-Bit signed Integer
 T}
 int64#signed long#T{
-64 bit signed integer
+64-Bit signed Integer
 T}
 real32#float#T{
-32 bit ieee 754 single precision floating point number
+32-Bit IEEE 754 single precision floating point number
 T}
 real64#double#T{
-64 bit ieee 754 double precision floating point number
+64-Bit IEEE 754 double precision floating point number
 T}
 real128#long double#T{
-128 bit ieee 754 quaduraple precision floating point number
+128-Bit IEEE 754 quadruple precision floating point number
 T}
 .TE
 .
@@ -325,7 +325,59 @@ Notice that Fortran does not provide a while loop.
 Expressions
 .
 .PP
-Stuff
+Fortran is considered by many experts to be the first majorly popular high-level programming language, and Backus and his team of IBM employees who created the language assumedly believed as much before its release in 1957. To break the mold in this world is to follow in the footsteps of predecessors and improve on their own work, all while implementing a new twist into a stale formula to craft a truly unique product. While low-level and medium-level programming languages possess the capabilities to write expressions, these expressions are a far cry from what many programmers consider expressions to be today in the modern computing landscape. In fact, many of these expressions are able to be produced in these non-high-level programming languages, but the recognizable English syntax of Fortran allows for easier use of these expressions. This section covers the revolutionary expressions provided by Fortran and their uses with light code examples to boot.
+.
+.NH 3
+Arithmetic Expressions
+.
+.PP
+In the modern day, Fortran is utilized for its uses in scientific and engineering programming, high-performance computing potential, and unmatched innate capabilities of numerical computation, so one may expect its arithmetic-based expressions to be top-notch, and this seems to be the case. Utilizing PEMDAS rules, Fortran mathematics are considered by most experts of the language to be one of its greatest strengths from its conciseness and ease of use. Below is a table showcasing some of the simple arithmetic operations and possible expressions in Fortran:
+{TABLE}
+.
+.NH 3
+Relational Expressions
+.
+.PP
+Fortran is most touted for its numerical computation abilities and scientific programming prowess, so naturally analyzing its user interface capabilities with menus or user input baked into the program itself comes with a few drawbacks. Relational expressions, for example, are highly used in these user-interface programs, so their usefulness extends to real-world Fortran only in checking logical conditions, whatever they may be used for. Below is a table showcasing some of the relational expressions usable in Fortran:
+{TABLE}
+.
+.NH 3
+Logical Expression
+.
+.PP
+Similar to relational expressions, the usefulness of logical expressions within real-world usages of Fortran is mainly only extended to checking logical conditions. Logical expressions are also often avoided in Fortran programs due to their verbosity when compared to other logical expressions from high-level programming languages, albeit not as wordy as it could possibly be. 
+Below is a table showcasing some of the logical expressions found within Fortran:
+{TABLE}
+.
+.NH 3
+Character Expressions
+.
+.PP
+Strings/Fortran characters are rarely used in Fortran for good reason, mainly because the programming language lacks the many functionalities and methods usable for strings which exist in most other high-level programming languages. There is but one character expression usable by Fortran: \F[C]//\F[], which is defined as the concatenation operator by Fortran; the lack of character expressions is telling but understandable, as Fortran lacks a necessity for character-based code since its main uses ignore such features. Below is a code example on how the concatenation operator of Fortran works:
+{CODE}
+.
+.NH 3
+Array Expressions
+.
+.PP
+The arguably strongest tool in the arsenal of Fortran was released with the major Fortran 90 update, the tool being the introduction of array operations and expressions which utilize all elements of an array at once instead of a single element at a time. As a programming language whose calling card is their ability to handle and perform mathematical computations and high-performance computing, implementing innate array expressions into the language was a no-brainer, and now this functionality acts as a major reason to use Fortran. Below is a snippet of code showcasing a few array operations along with array sectioning to work on specified elements of an array:
+{EXAMPLE}
+{SECTIONING ARRAY}
+.
+.NH 3
+Conditional Expressions
+.
+.PP
+One weakness of Fortran is its lack of usability in user-oriented programs, and this weakness is only made more apparent with the janky conditional operators. Fortran today writes conditional expressions using VERBOSE \F[C]IF-THEN-ELSE\F[] blocks of code, but the \F[C]THEN-ELSE\F[] portion was originally absent, leading to confusing syntax and discouraged programmers. Another way Fortran writes conditional expressions is with the \F[C]merge(3)\F[] method, which takes in 3 expressions and produces a result based on a condition check usually performed with relational operators. Examples of both types of conditional expressions are shown below:
+{IFELSE}
+{MEGRE}
+.
+.NH 3
+User-Defined Operators
+.
+.PP
+The last expression type covered in this report is the user-defined operator expressions one may overload if they so wish. Seeing where this is useful is tough, as normally user-defined operators extend the functionality of the programming language so specific domains and data types have certain operators to use whenever these domains are called upon, but Fortran is a one-trick pony who does their tricks extremely well. Nonetheless, overloading operators with user-defined ones is simple, and the code below showcases its usage in small program:
+{CODE}
 .
 .NH 2
 Subprograms
