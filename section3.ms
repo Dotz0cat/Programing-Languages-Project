@@ -110,6 +110,8 @@ Using modules
 .
 .SOURCE basic_mod.ms
 .
+.bp
+.
 .SOURCE use_mod.ms
 .
 .PP
@@ -121,6 +123,8 @@ a module,
 it needs to have an explicit interface.
 An interface is just a delecration of what a procedure takes.
 Think of it like a \FCC\F[] prototype.
+.
+.bp
 .
 .NH 2
 Submodules
@@ -181,6 +185,8 @@ Example function
 Alternative function declaration
 .
 .SOURCE function_alt.ms
+.
+.bp
 .
 .NH 3
 Subroutines
@@ -259,6 +265,8 @@ This specifies that any size could be passed.
 Example Array Delcaration
 .
 .SOURCE arrays.ms
+.
+.bp
 .
 .NH 2
 Allocate

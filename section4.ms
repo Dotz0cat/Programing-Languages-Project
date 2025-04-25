@@ -308,6 +308,8 @@ It is used to change the flow of a program upon a condition being true.
 .
 .SOURCE if_else.ms
 .
+.bp
+.
 .SOURCE if_elif.ms
 .
 .NH 3
@@ -320,6 +322,8 @@ This behaves like a \F[C]switch\F[] in \F[C]C\F[].
 .SOURCE select_case.ms
 .
 .SOURCE select_range.ms
+.
+.bp
 .
 .SOURCE select_case_ranges.ms
 .
@@ -394,6 +398,9 @@ _
 **#Expontiation#2 ** 3
 .TE
 .
+\&
+.bp
+.
 .NH 3
 Relational Expressions
 .
@@ -454,6 +461,9 @@ _
 \&.neqv.#Logical non equvilence#(p .neqv. q)
 .TE
 .
+\&
+.bp
+.
 .NH 3
 Character Expressions
 .
@@ -509,6 +519,8 @@ Examples of both types of conditional expressions are shown below:
 .SOURCE ternary.ms
 .
 .SOURCE merge.ms
+.
+.bp
 .
 .NH 3
 User-Defined Operators
@@ -626,6 +638,8 @@ after all, as there exists a few positives to knowing
 its features such as improved code reusability and gaining
 the ability to model real-world entities. 
 .
+.bp
+.
 .NH 3
 Basics of OOP
 .
@@ -641,6 +655,8 @@ and a method procedure being called is shown below:
 .SOURCE class.ms
 .
 .SOURCE type_bound_procedure.ms
+.
+.bp
 .
 .SOURCE tbp_usage.ms
 .
@@ -661,6 +677,8 @@ consequently, flexible object code within the program.
 Code examples of polymorphism and inheritance are shown below:
 .
 .SOURCE poly.ms
+.
+.bp
 .
 .SOURCE poly_usage.ms
 .
@@ -693,6 +711,8 @@ regarding their implementation in OOP.
 .SOURCE encap_usage.ms
 .
 .SOURCE abstract.ms
+.
+.bp
 .
 .SOURCE abstract_usage.ms
 .
