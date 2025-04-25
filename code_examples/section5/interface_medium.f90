@@ -1,8 +1,8 @@
-interface get_number
-    module subroutine get_number(number)
+interface op_lookup
+    pure module function op_lookup(op) result(type)
         .
         .
         .
-    end subroutine get_number
-end interface
+    end function op_lookup
+  end interface op_lookup
 

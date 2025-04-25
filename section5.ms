@@ -88,7 +88,7 @@ operator preseidence,
 and functions like $sin(x)$.
 To be able to handle these cleanly a parser was needed.
 Since this program was in Fortran and not \F[C]C\F[],
-a compiler\(emcompiler like \F[C]yacc\F[]/\F[C]bison\F[]
+a compiler\(encompiler like \F[C]yacc\F[]/\F[C]bison\F[]
 could not be used.
 To do this a \fBLALR(1)\fR parser was implemented.
 The action and goto table was generated with \F[C]Jison\F[],
@@ -98,9 +98,43 @@ It produced the tables that could be translated over to Fortran.
 .SOURCE grammar.ms
 .
 .NH 2
+Enumerations
+.
+.PP
+Parsing is hard.
+In order to make it easier,
+states should be kept.
+In order to have a easy to keep track of set of states,
+enumerators are used.
+Enumeration types are used to declare named constants in our program.
+Due to processor issues,
+(compiler: gfortran)
+Fortran 2023 enumeration types are not yet implemented.
+Due to this we used Fortran 2018 C interoptable enums.
+.
+.SOURCE enum_medium.ms
+.
+.NH 2
 Conculsion
 .
 .PP
-Stuff
+In this section,
+we have implemented a medium-sized Fortran calculator that supports parentheses,
+operator precedence,
+and standard math functions via a custom \fBLALR(1)\fP parser.
+We used modules and submodules to organize our code.
+We used \F[C]Jison\F[] to generate our action/goto tables,
+to overcome the lack of a Fortran specific compiler-compiler.
+We also made large use of Fortran\(cqs enumerations,
+to build our state machines and tables.
+.
+.PP
+On the positive side,
+Fortran\(cqs modules and submodules made organizing our code easy.
+However,
+Fortran\(cqs verbose syntax,
+does not lend well to parser building.
+Overall Fortran,
+is not a bad language when it is used for what it is suited for doing.
 .
 

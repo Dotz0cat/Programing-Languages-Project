@@ -15,7 +15,7 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
-				   procedure_medium.ms grammar.ms )
+				   procedure_medium.ms grammar.ms enum_medium.ms )
 
 PREPARED_MEDIUM_SOURCES = $(addprefix $(PREPARED_DIR)/medium/, \
 						  main.ms input.ms input_implations.ms action_mod.ms \

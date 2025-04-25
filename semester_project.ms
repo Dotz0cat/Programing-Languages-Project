@@ -101,28 +101,19 @@ Give a brief overview of the sections that comprise the report.
 .
 .LP
 2.1
-Introduction \(em What is the goal of this section?
+Introduction
 .
 .LP
 2.2
 Creation
-Who created the language?
-Why was the language created?
-What application domains is the language good for?
-Why?
 .
 .LP
 2.3
 Lifetime
-What has happened to the language since it was created?
-Rate the popularity of the language, then, now, and in the future.
-What is your evidence for this rating?
 .
 .LP
 2.4
 Current status in Industry
-What are major projects/companies using it
-How many jobs have proficiency in this as necessary or preferred 
 .
 .RE
 .
@@ -137,14 +128,11 @@ How many jobs have proficiency in this as necessary or preferred
 .
 .LP
 3.1
-Introduction \(em What is the goal of this section?
+Introduction
 .
 .LP
 3.2
 How Do you create a basic hello world program?
-Include a description of how you use the Programming environment to edit,
-build,
-and run your program.
 .
 .LP
 3.3 \(em 3.X
@@ -152,9 +140,7 @@ One section for each major feature
 .
 .LP
 3.X+1
-Resources \(em What books/manuals/web sites should I go to for further 
-information about the language?
-Make sure you cite the material here and include an entry in the bibliography.
+Resources 
 .
 .RE
 .
