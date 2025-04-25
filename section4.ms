@@ -720,7 +720,17 @@ regarding their implementation in OOP.
 Exception Handling and Optimization
 .
 .PP
-Stuff
+The final analysis regarding the features of Fortran is its abilities to handle exceptions and optimize its own code, two very important facets of a programming language with the ability to be a deciding factor in the decision-making process of what programming language to use in a certain project. Regarding how Fortran handles these subjects, their differences are virtually impossible to make any larger, as Fortran holds arguably the worst exception handling methods in relation to its popularity as a programming language while its optimization is so complex and powerful to the point where Fortran acts as the de facto best programming language option for high-performance computing. How Fortran fails horribly at one aspect and succeeds generationally at another is an anomaly, but it must be ignored if one wants to understand how these separate systems work, which is explained below.
 .
+.NH 3
+Exception Handling
 .
-
+.PP
+As stated before, Fortran struggles with exception handling mainly due to the fact it lacks innate exception handling tools present in most other high-level programming languages. The next best things are the error handling functions with the \F[C]STAT\F[] and \F[C]ERRMSG\F[] keywords introduced in Fortran 2003 representing status and error message arguments respectively for I/O operations. IEEE floating point arithmetic exceptions also exist for as flags for dividing by zero, value overflow, and invalid operations; subroutines could be used to make custom error exceptions for structured error management as well. These additions are fine, but one must remember these are only error handling functions and not exceptions, and a lack of exception handling functions makes Fortran an unappetizing language for certain types of programs and programmers. A code example for catching an error in a file I/O program is shown below:
+{ERROR}
+.
+.NH 3
+Optimization
+One of the strongest aspects of Fortran is its optimization features. Being innately designed for high-performance computing, Fortran is naturally a very optimized programming language, but techniques are possible to make execution even quicker. One such technique is optimizing loop by unrolling them manually or with a compiler with the keyword \F[C]!DIR$ UNROLL\F[], and another technique is using compiler directives like OpenMP (\F[C]!$OMP PARALLEL DO\F[]) or SIMD (\F[C]!DIR$ SIMD\F[]) to vectorize and parallelize data within the program. Other important techniques for optimization include avoiding unnecessary copies of data with \F[C]INTENT(INOUT)\F[] or pointers to minimize temporary arrays, using profiling flags to identify bottlenecks with \F[C]-PG\F[] in GCC, using \F[C]PURE\F[]/\F[C]ELEMENTAL\F[] functions for compiler inlining, and using array operations introduced in Fortran 90 to limit loop usage when working with array elements for vectorization. Another neat trick is using memory access patterns to improve cache performance, which is possible by avoiding stride in column-major arrays. The last point is difficult to visualize, so a snippet of code is provided of this practice in motion.
+{MEMACC}
+.
