@@ -53,7 +53,7 @@ with little to no computational drawback from the new programming language
 allows engineers and scientists to enter the programming space,
 which consequently expands computer usage within
 these application domains with scientific computing
-and numeric computations present within high-performance computing systems.
+and numeric computations present within high-performance computing systems. (Britannica)
 .
 .NH 2
 Lifetime
@@ -90,7 +90,7 @@ according to the TIBOE Index of February 2025,
 which is still higher than most programming languages,
 but a usage rate of 1.75% leaves more to be desired,
 although experts in the field still consider Fortran
-to be the standard in regards to scientific programming.
+to be the standard in regards to scientific programming (TIBOE).
 Perhaps with the increase of large artificial intelligence learning algorithms
 and supercomputer usage,
 usage of Fortran may increase in the following years,
