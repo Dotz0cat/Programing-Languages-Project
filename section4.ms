@@ -531,28 +531,81 @@ and the code below showcases its usage in small program:
 Subprograms
 .
 .PP
-Another area of innovation by Fortran must be its advancements in subprograms, even if these advancements are in its English syntax developments. Subprograms exist in non-high-level programming languages but are often verbose and confusing to code with, which is unfortunate considering the usefulness of subprograms in real-world programs regarding readability and debugging management. The advancement of usage for the English language in the syntax of Fortran helps clear up confusing messes of code which plagued the readability and, consequently, usefulness of subprograms. The two main types of subprogram, functions and subroutines, will be reviewed below.
+Another area of innovation by Fortran must be its advancements in subprograms,
+even if these advancements are in its English syntax developments.
+Subprograms exist in non-high-level programming languages but are
+often verbose and confusing to code with,
+which is unfortunate considering the usefulness of subprograms
+in real-world programs regarding readability and debugging management.
+The advancement of usage for the English language
+in the syntax of Fortran helps clear up confusing messes
+of code which plagued the readability and,
+consequently,
+usefulness of subprograms.
+The two main types of subprogram,
+functions and subroutines,
+will be reviewed below.
 .
 .NH 3
 Functions
 .
 .PP
-The first type of main subprogram utilized in Fortran is the function, which fulfills the role of computing and returning a single value after being called by the program. These are perfect for returning the value of mathematical computations which are computed by the code within the function, and any way to organize and maintain the code for Fortran and its unique and complex mathematical processing programs is a major help. An example of some Fortran function code is shown below:
-{CODE}
+The first type of main subprogram utilized in Fortran is the function,
+which fulfills the role of computing and returning a single value after
+being called by the program.
+These are perfect for returning the value of mathematical computations
+which are computed by the code within the function,
+and any way to organize and maintain the code for Fortran
+and its unique and complex mathematical processing programs is a major help.
+An example of some Fortran function code is shown below:
+.
+.SOURCE square.ms
 .
 .NH 3
-Subprograms
+Subroutines
 .
 .PP
-The second type of main subprogram utilized in Fortran is the subroutine, which performs operations whenever called by the program and may modify arguments within its code. While subroutines may seem so similar to functions to the point where its existence is questionable, a few key differences let the former stick out from the latter, mainly its trait of not returning values. Other notable differences from functions include the already-stated ability to modify arguments within its code and perform I/O operations along with other side effects if desired. Code showcasing the usage of subroutines is shown below:
-{CODE}
+The second type of main subprogram utilized in Fortran is the subroutine,
+which performs operations whenever called by the program
+and may modify arguments within its code.
+While subroutines may seem so similar to functions
+to the point where its existence is questionable,
+a few key differences let the former stick out from the latter,
+mainly its trait of not returning values.
+Other notable differences from functions include the already-stated ability
+to modify arguments within its code and perform I/O operations
+along with other side effects if desired.
+Code showcasing the usage of subroutines is shown below:
+.
+.SOURCE swap.ms
 .
 .NH 3
 Key Features
 .
 .PP
-While functions and subroutines alone are nice to have for program organization and efficiency, Fortran subprograms possess a few key features added in the major Fortran 90 update, many of which increasing the usability and potential of subprograms. One of the most important features included is the \F[C]INTENT(IN/OUT/INOUT)\F[] method which determines the intent of a certain argument as input-only, output-only, and both input and output respectively, allowing for clean I/O functionality; functions are usually \F[C]INTENT(IN)\F[], while subroutines are conversely \F[C]INTENT(OUT)\F[]. Other important features include the \F[C]OPTIONAL\F[] keyword for flexible arguments, the \F[C]RECURSIVE\F[] keyword for its namesake recursive functions or subroutines, the \F[C]PURE\F[] and \F[C]ELEMENTAL\F[] keywords introduced in Fortran 95 for subprograms with the parallel computing-friendly lack of side effects and array or scalar-supported work, and internal subprograms defined within a \F[C]PROGRAM\F[], \F[C]FUNCTION\F[], or \F[C]SUBROUTINE\F[]. An example piece of code showcasing a recursive subprogram is shown below:
-{CODE}
+While functions and subroutines alone are nice to have
+for program organization and efficiency,
+Fortran subprograms possess a few key features added in the major Fortran 90 update,
+many of which increasing the usability and potential of subprograms.
+One of the most important features included
+is the \F[C]INTENT(IN/OUT/INOUT)\F[] method which determines the intent
+of a certain argument as input-only,
+output-only,
+and both input and output respectively,
+allowing for clean I/O functionality;
+functions are usually \F[C]INTENT(IN)\F[],
+while subroutines are conversely \F[C]INTENT(OUT)\F[].
+Other important features include the \F[C]OPTIONAL\F[] keyword for flexible arguments,
+the \F[C]RECURSIVE\F[] keyword for its namesake recursive functions or subroutines,
+the \F[C]PURE\F[] and \F[C]ELEMENTAL\F[] keywords introduced in Fortran 95
+for subprograms with the parallel computing-friendly lack of side effects
+and array or scalar-supported work,
+and internal subprograms defined within a \F[C]PROGRAM\F[],
+\F[C]FUNCTION\F[],
+or \F[C]SUBROUTINE\F[].
+An example piece of code showcasing a recursive subprogram is shown below:
+.
+.SOURCE recursive.ms
 .
 .NH 2
 Object-orientation

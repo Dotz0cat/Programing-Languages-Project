@@ -14,7 +14,8 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   select_range.ms select_case_ranges.ms \
 				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms \
 				   concat.ms array_ops.ms array_subops.ms ternary.ms \
-				   merge.ms operator_overload.ms ) \
+				   merge.ms operator_overload.ms \
+				   square.ms swap.ms recursive.ms ) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
 				   procedure_medium.ms grammar.ms enum_medium.ms )
