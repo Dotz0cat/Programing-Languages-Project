@@ -15,7 +15,11 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms \
 				   concat.ms array_ops.ms array_subops.ms ternary.ms \
 				   merge.ms operator_overload.ms \
-				   square.ms swap.ms recursive.ms ) \
+				   square.ms swap.ms recursive.ms \
+				   class.ms type_bound_procedure.ms poly.ms \
+				   inherit.ms encap.ms abstract.ms \
+				   tbp_usage.ms poly_usage.ms inherit_usage.ms encap_usage.ms \
+				   abstract_usage.ms ) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
 				   procedure_medium.ms grammar.ms enum_medium.ms )

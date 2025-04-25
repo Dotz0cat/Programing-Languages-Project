@@ -611,31 +611,90 @@ An example piece of code showcasing a recursive subprogram is shown below:
 Object-orientation
 .
 .PP
-Ever since the major Fortran 2003 update, the historic programming language has supported object-oriented programming, and while its existence and shortcomings have been touched upon in the paradigm section already, this portion of the document will discuss its possible Fortran features if one was to ever use OOP in a Fortran program instead of a more competent programming language with a numerical computation library for some odd reason. Just because OOP in Fortran is clunky and feels unplanned is not an excuse to avoid understanding its OOP abilities, after all, as there exists a few positives to knowing its features such as improved code reusability and gaining the ability to model real-world entities. 
+Ever since the major Fortran 2003 update,
+the historic programming language has supported object-oriented programming,
+and while its existence and shortcomings have been touched upon
+in the paradigm section already,
+this portion of the document will discuss
+its possible Fortran features if one was to
+ever use OOP in a Fortran program instead
+of a more competent programming language with
+a numerical computation library for some odd reason.
+Just because OOP in Fortran is clunky and feels unplanned
+is not an excuse to avoid understanding its OOP abilities,
+after all, as there exists a few positives to knowing
+its features such as improved code reusability and gaining
+the ability to model real-world entities. 
 .
 .NH 3
 Basics of OOP
 .
 .PP
-Fortran uses derived types to define classes, which are like the keywords \F[C]struct\F[] in C-based programming languages and \F[C]class\F[] in other OOP-supported languages. These derived type classes are then bound to subprograms acting as methods, which execute the code containing the derived type. An example of a derived type class declaration and a method procedure being called is shown below:
-{CLASS}
-{METHOD}
+Fortran uses derived types to define classes,
+which are like the keywords \F[C]struct\F[] in C-based programming languages
+and \F[C]class\F[] in other OOP-supported languages.
+These derived type classes are then bound to subprograms acting as methods,
+which execute the code containing the derived type.
+An example of a derived type class declaration
+and a method procedure being called is shown below:
+.
+.SOURCE class.ms
+.
+.SOURCE type_bound_procedure.ms
+.
+.SOURCE tbp_usage.ms
 .
 .NH 3
 Polymorphism & Inheritance
 .
 .PP
-As with most programming languages which support object-oriented programming, polymorphism and single inheritance are supported to maintain code and keep it flexible for future use. Using the \F[C]EXTENDS\F[] keyword allows for a Fortran class to inherit from another class, maintaining the functions, variables and other reusable code of the class being inherited from. Defining an object with the keyword \F[C]CLASS\F[] instead of \F[C]TYPE\F[] allows for polymorphism and, consequently, flexible object code within the program. Code examples of polymorphism and inheritance are shown below:
-{POLY}
-{INHERIT}
+As with most programming languages which support object-oriented programming,
+polymorphism and single inheritance are supported
+to maintain code and keep it flexible for future use.
+Using the \F[C]EXTENDS\F[] keyword allows for a Fortran class
+to inherit from another class,
+maintaining the functions,
+variables and other reusable code of the class being inherited from.
+Defining an object with the keyword \F[C]CLASS\F[]
+instead of \F[C]TYPE\F[] allows for polymorphism and,
+consequently, flexible object code within the program.
+Code examples of polymorphism and inheritance are shown below:
+.
+.SOURCE poly.ms
+.
+.SOURCE poly_usage.ms
+.
+.SOURCE inherit.ms
+.
+.SOURCE inherit_usage.ms
 .
 .NH 3
 Encapsulation, Overloading, & Abstract Interfaces
 .
 .PP
-OOP in Fortran also allows for the usual abilities of encapsulation, overloading, and interface abstraction with the right method calls. Encapsulation is simple as it is with most other OOP-supporting programming languages, relying on \F[C]PRIVATE\F[] and \F[C]PUBLIC\F[] keywords to hide data from the user and control how data is accessed. Abstract base classes resemble Java and C# interfaces and act as the replacement for Fortran, though its usability is fairly limited with its tough-love nephew templates not being around to pick up the pace where these pseudo-interfaces fall behind. Operator overloading has been discussed in this features section already, but maybe visualizing the code for encapsulation and interface abstraction can clear up any misconceptions regarding their implementation in OOP.
-{ENCAP}
-{ABSTRACT}
+OOP in Fortran also allows for the usual abilities of encapsulation,
+overloading,
+and interface abstraction with the right method calls.
+Encapsulation is simple as it is with most other OOP-supporting programming languages,
+relying on \F[C]PRIVATE\F[] and \F[C]PUBLIC\F[] keywords
+to hide data from the user and control how data is accessed.
+Abstract base classes resemble Java and C# interfaces and act as the
+replacement for Fortran,
+though its usability is fairly limited with
+its tough-love nephew templates not being around to pick up
+the pace where these pseudo-interfaces fall behind.
+Operator overloading has been discussed in this features section already,
+but maybe visualizing the code for encapsulation
+and interface abstraction can clear up any misconceptions
+regarding their implementation in OOP.
+.
+.SOURCE encap.ms
+.
+.SOURCE encap_usage.ms
+.
+.SOURCE abstract.ms
+.
+.SOURCE abstract_usage.ms
 .
 .NH 2
 Exception Handling and Optimization
