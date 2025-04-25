@@ -12,7 +12,9 @@ PREPARED_SOURCES = $(addprefix $(PREPARED_DIR)/section3/, \
 				   $(addprefix $(PREPARED_DIR)/section4/, \
 				   if_then.ms if_elif.ms if_else.ms select_case.ms \
 				   select_range.ms select_case_ranges.ms \
-				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms) \
+				   do.ms do_step.ms do_while_eqiv.ms depracated_while.ms \
+				   concat.ms array_ops.ms array_subops.ms ternary.ms \
+				   merge.ms operator_overload.ms ) \
 				   $(addprefix $(PREPARED_DIR)/section5/, \
 				   sub_mod_medium.ms mod_medium.ms interface_medium.ms \
 				   procedure_medium.ms grammar.ms enum_medium.ms )
