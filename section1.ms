@@ -13,29 +13,28 @@ Introduction
 .
 .PP
 This project is over the Fortran programming language.
-Our goal in this project is to provide an overview of the Fortran programming language.
-We chose this language because it is an interesting language.
-It is a language that most people think of as an older language.
-When a lot of people think about it,
-they think of punched cards, and mainframes.
-Through chosing this language,
-we want to show you that Fortran is a suprisingly modern programming language.
+The main goal of this project is to provide an overview of the Fortran programming language, including its features and usages in the modern programming landscape.
+This programming language was chosen simply because it was an interesting language and one more people should be aware of.
+While many programmers who know of Fortran in passing think of it as an archaic language stuck in the days of punch cards and mainframes,
+the truth is this historic high-level programming language still has the necessary tools to be useful in a modern context, 
+even if said context is somewhat limited.
 .
 .PP
-In order to share some of the finer features of the language,
-we will write a medium sized program.
-This medium sized program will then the used to analyze language features.
-This will allow us to share how everything we talked about comes together to form an entire system.
+In order to share some of the finer features of the language, 
+a medium-sized program will be written in Fortran which showcases its strengths, weaknesses, unique quirks, and legacy oddities.
+Writing a program of this caliber is not only good practice for anyone who wants to learn more about a specific programming language,
+but also acts as a way to tie back the text-heavy contents of this report into a real-world example of this language being used.
 .
 .NH 2
 .
 .PP
-Our goal through this project is to dispel some of the antiqudated views about Fortran.
-We first give the history of the Fortran programming language.
-We then give a brief tutorial of the programming language.
-After that we share some of the basic features of Fortran.
-Next we will share our medium program implementation.
-After that we will evaulate our progamming language.
-Finally we will give our reflections on the Fortran language.
+The main goal of this project is to dispel the fog illuminating antiquated views about Fortran from programmers who know of the language by name only.
+This dispelling process begins with a history of the Fortran programming language to introduce its importance,
+then a brief tutorial of a simple Fortran program is showcased so features can be visualized.
+After that, some of the basic features of Fortran are shared and delved into to show onlookers how deep this historic language truly runs,
+which leads into the anticipated reveal and showcase of the medium-sized program created in Fortran.
+To end this rollercoaster ride of a programming language crash course, 
+certain aspects of Fortran will be evaluated and judged in an isolated context as well as lightly compared to other popular high-level programming languages,
+before it all ends with a reflection from the authors regarding Fortran and the project for which this document was designed.
 .
 
