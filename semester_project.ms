@@ -80,15 +80,11 @@ University of Central Arkansas
 .
 .LP
 1.1
-What was the goal of the project?
-Why you choose this language?
-What was the medium program that you decided to implement?
-What is the goal of this report?
+Introductions
 .
 .LP
 1.2
-How does the report achieve this goal...
-Give a brief overview of the sections that comprise the report.
+Project Goals
 .
 .RE
 .
