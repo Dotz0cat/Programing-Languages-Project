@@ -9,7 +9,7 @@ References
 https://www.britannica.com/technology/FORTRAN
 .
 .XP
-\fIJison / Jison—Parse table visualization page\fP.
+\fIJison / Jison\(emParse table visualization page\fP.
 (n.d.).
 Retrieved April 25, 2025,
 from https://gerhobbelt.github.io/jison/try/usf/

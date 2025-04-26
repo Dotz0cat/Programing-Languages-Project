@@ -137,12 +137,64 @@ Introduction
 How Do you create a basic hello world program?
 .
 .LP
-3.3 \(em 3.X
-One section for each major feature
+3.3
+Interinsics
 .
 .LP
-3.X+1
-Resources 
+3.4
+Modules
+.
+.LP
+3.5
+Submodules
+.
+.LP
+3.6
+Procedures
+.
+.RS
+.
+.LP
+3.6.1
+Functions
+.
+.LP
+3.6.2
+Subroutines
+.
+.LP
+3.6.3
+Dummy Arguments
+.
+.RE
+.
+.LP
+3.7
+Interfaces
+.
+.LP
+3.8
+Arrays
+.
+.LP
+3.9
+Allocate
+.
+.LP
+3.10
+Derived types
+.
+.LP
+3.11
+Modern Fortran Explained
+.
+.LP
+3.12
+Fortran-lang.org
+.
+.LP
+3.13
+Gfortran Documentation
 .
 .RE
 .
@@ -157,11 +209,47 @@ Resources
 .
 .LP
 4.1
-Introduction \(em What is the goal of this section?
+Introduction
 .
 .LP
 4.2
 Paradigm
+.
+.RS
+.
+.LP
+4.2.1
+Imperative Programming
+.
+.LP
+4.2.2
+Procedural Programming
+.
+.LP
+4.2.3
+Structured Programming
+.
+.LP
+4.2.4
+Modular Programming
+.
+.LP
+4.2.5
+Object-Oriented Programming
+.
+.LP
+4.2.6
+Generic Programming
+.
+.LP
+4.2.7
+Array Programming
+.
+.LP
+4.2.8
+Parallel Programming
+.
+.RE
 .
 .LP
 4.3
@@ -171,21 +259,115 @@ Data Types
 4.4
 Control Flow
 .
+.RS
+.
+.LP
+4.4.1
+If then
+.
+.LP
+4.4.2
+Select case
+.
+.LP
+4.4.3
+Do construct
+.
+.RE
+.
 .LP
 4.5
 Expressions
+.
+.RS
+.
+.LP
+4.5.1
+Arithmetic Expressions
+.
+.LP
+4.5.2
+Relational Expressions
+.
+.LP
+4.5.3
+Logical Expression
+.
+.LP
+4.5.4
+Character Expressions
+.
+.LP
+4.5.5
+Array Expressions
+.
+.LP
+4.5.6
+Conditional Expressions
+.
+.LP
+4.5.7
+User-Defined Operators
+.
+.RE
 .
 .LP
 4.6
 Subprograms
 .
+.RS
+.
+.LP
+4.6.1
+Functions
+.
+.LP
+4.6.2
+Subroutines
+.
+.LP
+4.6.3
+Key Features
+.
+.RE
+.
 .LP
 4.7
 Object-orientation
 .
+.RS
+.
+.LP
+4.7.1
+Basics of OOP
+.
+.LP
+4.7.2
+Polymorphism & Inheritance
+.
+.LP
+4.7.3.
+Encapsulation,
+Overloading,
+& Abstract Interfaces
+.
+.RE
+.
 .LP
 4.8
 Exception Handling and Optimization 
+.
+.RS
+.
+.LP
+4.8.1
+Exception Handling
+.
+.LP
+4.8.2
+Optimization
+.
+.RE
 .
 .RE
 .
@@ -200,18 +382,35 @@ Exception Handling and Optimization
 .
 .LP
 5.1
-Introduction \(em What is the goal of this section?
-What was the goal of the program you wrote?
+Introduction
 .
 .LP
-5.2-5.x
-Describe the basic design of the program.
-How did you leverage the major language features to implement the design?
+5.2
+Program Structure
 .
 .LP
-5.x+1
-Conclusion \(em What was great about implementing the program in your language?
-What was awful about implementing the program in your language?
+5.3
+Modular Structure
+.
+.LP
+5.4
+Interfaces
+.
+.LP
+5.5
+Subprograms Used
+.
+.LP
+5.6
+Parsing
+.
+.LP
+5.7
+Enumerations
+.
+.LP
+5.8
+Conculsion
 .
 .RE
 .
@@ -226,7 +425,7 @@ What was awful about implementing the program in your language?
 .
 .LP
 6.1
-Introduction \(em What is the goal of this section?
+Introduction
 .
 .LP
 6.2
@@ -266,8 +465,7 @@ Restricted aliasing
 .
 .LP
 6.11
-Conclusion \(em what is your overall feeling about the language?
-Compared to your language would it have been easier or harder to implement your medium-sized program in C++ and WHY?
+Conclusion
 .
 .RE
 .
@@ -282,7 +480,7 @@ Compared to your language would it have been easier or harder to implement your 
 .
 .LP
 7.1
-Introduction \(em What is the goal of this section?
+Introduction
 .
 .RE
 .

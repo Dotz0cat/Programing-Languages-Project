@@ -32,6 +32,8 @@ It is set up as a driver program,
 utilizing multiple modules to take in user input
 and perform calculations with said input before returning the correct calculated value.
 .
+.bp
+.
 .NH 2
 Modular Structure
 .
@@ -49,6 +51,8 @@ similar to submodules would be their header files.
 Example of a Module Being Used Like a Header File
 .
 .SOURCE mod_medium.ms
+.
+.bp
 .
 .LP
 .ce
@@ -74,6 +78,8 @@ program to handle more than one data type/kind through overloading.
 Example of an Interface Being Used
 .
 .SOURCE interface_medium.ms
+.
+.bp
 .
 .NH 2
 Subprograms Used
@@ -112,6 +118,8 @@ a \F[C]bison\F[]-like program in JavaScript.
 It produces the tables which were promptly translated over to Fortran for future use.
 .
 .SOURCE grammar.ms
+.
+.bp
 .
 .NH 2
 Enumerations

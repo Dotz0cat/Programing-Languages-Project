@@ -339,5 +339,26 @@ An amazing series of books with many releases following language revisions.
 The latest release is \fIModern Fortran Explained: Incorperating Fortran 2023\fR.
 Wrote by Michael Metcalf and John Reid, later adding Malcom Cohen and Reinhold Bader.
 .
+.NH 2
+Fortran-lang.org
+.
+.PP
+This is the website that has revived Fortran.
+It contains everything from basic tutorials,
+to more advanced demostrations.
+There is also a discourse board which can be very helpful at times.
+It is truly a wealth of knowledge,
+where old-timers,
+a new users gather alike.
+.
+.NH 2
+Gfortran Documentation
+.
+.PP
+This source is not going to teach you much new things.
+However,
+it shines later when you are trying to figure out processor specific behaviour.
+Its intrinsic procedures section is the best at showing what is advaiable,
+in gfortran.
 .
 
