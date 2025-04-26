@@ -10,9 +10,15 @@ Tutorial
 Introduction
 .
 .PP
-In this section, the steps on how to make a basic Hello World in the Fortran programming language program will be provided.
-In addition, the basic Fortran environment and its compilation process will also be showcased.
-Afterwards, some major features of the language will be demonstrated before ending with some shared sources for further inquiry regarding Fortran. 
+In this section,
+the steps on how to make a basic Hello World
+in the Fortran programming language program will be provided.
+In addition,
+the basic Fortran environment
+and its compilation process will also be showcased.
+Afterwards,
+some major features of the language will
+be demonstrated before ending with some shared sources for further inquiry regarding Fortran. 
 .
 .NH 2
 How to Create a Hello World Program in Fortran?
@@ -43,14 +49,16 @@ most free form source code has the file extension \FCf90\F[].
 Every Fortran program begins with \FCprogram [Name]\F[].
 Every Fortran program also ends with \FCend program [Name]\F[].
 \FCName\F[] is optional on the end statement.
-Afterwards, the \FCuse\F[] statements are included in the program,
+Afterwards,
+the \FCuse\F[] statements are included in the program,
 but since this is a basic \*QHello World!\*U program, none are needed.
 Next is the option to disable the implicit features of the language.
 Most programs should use \FCimplicit none\F[];
 there is almost no reason that a new modern Fortran program should use
 the implicit features of the language.
 After this exists the line \FCprint *, \(aqHello World!\(aq\F[].
-\FCprint\F[], which tells the processor it needs to print an argument.
+\FCprint\F[],
+which tells the processor it needs to print an argument.
 The \FC*\fR tells \FCprint\F[] it needs to print to the default unit;
 \FC\(aqHello World!\(aq\F[] is the string to be printed.
 .
@@ -63,7 +71,8 @@ one of the many examples of a Fortran compiler;
 other compliers include iFort (Intel\(cqs Fortran compiler),
 Flang (The LLVM project\(cqs Fortran compiler),
 and nAGfor (From nAG).
-After compiling the file, \FChello.f90\F[] is transformed into a runnable
+After compiling the file,
+\FChello.f90\F[] is transformed into a runnable
 program \FChello\F[].
 .
 .LP
@@ -116,7 +125,8 @@ Using Modules
 Modules should almost always begin with \FCimplcit none\F[].
 In modules, a programmer can set whether something is exported or not;
 this is done by setting something to either \FCpublic\F[] or \FCprivate\F[].
-When there is a procedure/subprogram (function or subroutine) which needs to be used outside of
+When there is a procedure/subprogram
+(function or subroutine) which needs to be used outside of
 a module,
 it needs to have an explicit interface.
 An interface is just a delecration of what a procedure takes.
@@ -300,8 +310,10 @@ Derived Types
 .PP
 Sometimes programmers have some structured data to deal with.
 For example, the program contains multiple variables which are intertwined with each other.
-In \FCC\F[], defining a \FCstruct\F[] would be enough to handle this.
-In Fortran, a derived type would be defined instead.
+In \FCC\F[],
+defining a \FCstruct\F[] would be enough to handle this.
+In Fortran,
+a derived type would be defined instead.
 .
 .LP
 .ce
@@ -332,7 +344,8 @@ Modern Fortran Explained
 .PP
 An amazing series of books with many releases following language revisions.
 The latest release is \fIModern Fortran Explained: Incorperating Fortran 2023\fR.
-Written by Michael Metcalf and John Reid, with later additions by Malcolm Cohen and Reinhold Bader.
+Written by Michael Metcalf and John Reid,
+with later additions by Malcolm Cohen and Reinhold Bader.
 .
 .NH 2
 Fortran-lang.org
@@ -340,9 +353,12 @@ Fortran-lang.org
 .PP
 This is the website responsible for reviving Fortran.
 It contains everything from basic tutorials to more advanced demonstrations.
-There is also a discourse board, which can be very helpful at times.
-It is truly a wealth of knowledge where old-timers, new users,
-programming prodigies, and clueless coders all gather to discuss their hatred and love of Fortran.
+There is also a discourse board,
+which can be very helpful at times.
+It is truly a wealth of knowledge where old-timers,
+new users,
+programming prodigies,
+and clueless coders all gather to discuss their hatred and love of Fortran.
 .
 .NH 2
 Gfortran Documentation
